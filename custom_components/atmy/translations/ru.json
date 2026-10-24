@@ -4,11 +4,15 @@
       "user": {
         "title": "Качество воздуха Atmy",
         "description": "Оставьте поле пустым, чтобы взять ближайший к дому город (в радиусе 50 км), или введите название города на любом языке.",
-        "data": { "query": "Город" }
+        "data": {
+          "query": "Город"
+        }
       },
       "pick": {
         "title": "Выберите город",
-        "data": { "city": "Город" }
+        "data": {
+          "city": "Город"
+        }
       }
     },
     "error": {
@@ -22,8 +26,12 @@
   },
   "entity": {
     "sensor": {
-      "pm25": { "name": "PM2.5" },
-      "aqi": { "name": "Индекс AQI (США)" },
+      "pm25": {
+        "name": "PM2.5"
+      },
+      "aqi": {
+        "name": "Индекс AQI (США)"
+      },
       "level": {
         "name": "Качество воздуха",
         "state": {
@@ -35,10 +43,33 @@
           "hazardous": "Опасное"
         }
       },
-      "pm25_yesterday": { "name": "PM2.5 вчера" },
-      "accumulation_risk": { "name": "Накопление загрязнения" },
-      "sensors": { "name": "Датчики" },
-      "updated": { "name": "Обновлено" }
+      "pm25_yesterday": {
+        "name": "PM2.5 вчера"
+      },
+      "accumulation_risk": {
+        "name": "Накопление загрязнения"
+      },
+      "temperature": {
+        "name": "Температура"
+      },
+      "humidity": {
+        "name": "Влажность"
+      },
+      "pressure": {
+        "name": "Давление"
+      },
+      "wind_speed": {
+        "name": "Скорость ветра"
+      },
+      "wind_gust": {
+        "name": "Порывы ветра"
+      },
+      "sensors": {
+        "name": "Датчики"
+      },
+      "updated": {
+        "name": "Обновлено"
+      }
     }
   }
 }

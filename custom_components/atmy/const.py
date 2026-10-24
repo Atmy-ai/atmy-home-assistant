@@ -8,7 +8,8 @@ API = "https://api.atmy.ai/v1"
 UPDATE_INTERVAL = timedelta(minutes=15)
 CONF_CITY = "city"
 CONF_CITY_ID = "city_id"
-ATTRIBUTION = "Atmy (atmy.ai): public and citizen sensor networks; approximate values, not official monitoring."
+ATTRIBUTION = ("Atmy (atmy.ai): public and citizen sensor networks; approximate values, not official monitoring. "
+               "Weather: Open-Meteo.com (CC BY 4.0), collected by Atmy.")
 # Languages of city and country names on Atmy.
 LANGUAGES = {"en", "ru", "de", "fr", "es", "it", "pt-BR", "pl", "cs", "hu", "ro", "bg", "sr", "id", "hi", "ja", "zh",
              "uz", "kk", "ky", "tg", "az", "ka", "hy", "tr"}

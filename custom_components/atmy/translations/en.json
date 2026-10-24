@@ -4,11 +4,15 @@
       "user": {
         "title": "Atmy air quality",
         "description": "Leave the field empty to use the city nearest to your home (within 50 km), or type a city name in any language.",
-        "data": { "query": "City" }
+        "data": {
+          "query": "City"
+        }
       },
       "pick": {
         "title": "Choose the city",
-        "data": { "city": "City" }
+        "data": {
+          "city": "City"
+        }
       }
     },
     "error": {
@@ -22,8 +26,12 @@
   },
   "entity": {
     "sensor": {
-      "pm25": { "name": "PM2.5" },
-      "aqi": { "name": "US AQI" },
+      "pm25": {
+        "name": "PM2.5"
+      },
+      "aqi": {
+        "name": "US AQI"
+      },
       "level": {
         "name": "Air quality",
         "state": {
@@ -35,10 +43,33 @@
           "hazardous": "Hazardous"
         }
       },
-      "pm25_yesterday": { "name": "PM2.5 yesterday" },
-      "accumulation_risk": { "name": "Pollution accumulation" },
-      "sensors": { "name": "Sensors" },
-      "updated": { "name": "Updated" }
+      "pm25_yesterday": {
+        "name": "PM2.5 yesterday"
+      },
+      "accumulation_risk": {
+        "name": "Pollution accumulation"
+      },
+      "temperature": {
+        "name": "Temperature"
+      },
+      "humidity": {
+        "name": "Humidity"
+      },
+      "pressure": {
+        "name": "Pressure"
+      },
+      "wind_speed": {
+        "name": "Wind speed"
+      },
+      "wind_gust": {
+        "name": "Wind gusts"
+      },
+      "sensors": {
+        "name": "Sensors"
+      },
+      "updated": {
+        "name": "Updated"
+      }
     }
   }
 }

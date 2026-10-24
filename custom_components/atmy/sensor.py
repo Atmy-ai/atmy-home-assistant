@@ -1,4 +1,4 @@
-"""Atmy sensors: PM2.5 now, US AQI, level, yesterday's PM2.5, the pollution accumulation index, sensors."""
+"""Atmy sensors: PM2.5 now, US AQI, level, yesterday's PM2.5, the pollution accumulation index, the weather Atmy keeps for the city, sensors."""
 
 from __future__ import annotations
 
@@ -8,7 +8,8 @@ from datetime import datetime, timezone
 from typing import Any
 
 from homeassistant.components.sensor import SensorDeviceClass, SensorEntity, SensorEntityDescription, SensorStateClass
-from homeassistant.const import CONCENTRATION_MICROGRAMS_PER_CUBIC_METER, EntityCategory
+from homeassistant.const import (CONCENTRATION_MICROGRAMS_PER_CUBIC_METER, PERCENTAGE, EntityCategory, UnitOfPressure, UnitOfSpeed,
+                                 UnitOfTemperature)
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.device_registry import DeviceEntryType, DeviceInfo
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
@@ -37,6 +38,11 @@ def _now(data: dict[str, Any]) -> dict[str, Any]:
     now = data["current"].get("now") or {}
     # A stale city (no fresh readings) has no value now rather than an old one.
     return now if now.get("status") == "current" else {}
+
+
+def _weather(data: dict[str, Any]) -> dict[str, Any]:
+    # Weather from Atmy's own server: the city's latest reading (the API never asks a provider for it).
+    return data["current"].get("weather") or {}
 
 
 def _hours(data: dict[str, Any]) -> list[dict[str, Any]]:
@@ -87,6 +93,21 @@ SENSORS: tuple[AtmySensorDescription, ...] = (
     AtmySensorDescription(key="accumulation_risk", translation_key="accumulation_risk", native_unit_of_measurement="%",
                           state_class=SensorStateClass.MEASUREMENT, icon="mdi:weather-fog", value=_accumulation_now,
                           attributes=_accumulation_attributes),
+    AtmySensorDescription(key="temperature", translation_key="temperature", device_class=SensorDeviceClass.TEMPERATURE,
+                          native_unit_of_measurement=UnitOfTemperature.CELSIUS, state_class=SensorStateClass.MEASUREMENT, suggested_display_precision=1,
+                          value=lambda d: _weather(d).get("temperature_c"),
+                          attributes=lambda d: {"feels_like": _weather(d).get("feels_like_c"), "condition": _weather(d).get("condition"),
+                                                "observed_at": _weather(d).get("observed_at")}),
+    AtmySensorDescription(key="humidity", translation_key="humidity", device_class=SensorDeviceClass.HUMIDITY, native_unit_of_measurement=PERCENTAGE,
+                          state_class=SensorStateClass.MEASUREMENT, value=lambda d: _weather(d).get("humidity_percent")),
+    AtmySensorDescription(key="pressure", translation_key="pressure", device_class=SensorDeviceClass.ATMOSPHERIC_PRESSURE,
+                          native_unit_of_measurement=UnitOfPressure.HPA, state_class=SensorStateClass.MEASUREMENT, value=lambda d: _weather(d).get("pressure_hpa")),
+    AtmySensorDescription(key="wind_speed", translation_key="wind_speed", device_class=SensorDeviceClass.WIND_SPEED,
+                          native_unit_of_measurement=UnitOfSpeed.METERS_PER_SECOND, state_class=SensorStateClass.MEASUREMENT, suggested_display_precision=1,
+                          value=lambda d: _weather(d).get("wind_m_s"), attributes=lambda d: {"direction": _weather(d).get("wind_direction_deg")}),
+    AtmySensorDescription(key="wind_gust", translation_key="wind_gust", device_class=SensorDeviceClass.WIND_SPEED,
+                          native_unit_of_measurement=UnitOfSpeed.METERS_PER_SECOND, state_class=SensorStateClass.MEASUREMENT, suggested_display_precision=1,
+                          value=lambda d: _weather(d).get("wind_gust_m_s")),
     AtmySensorDescription(key="sensors", translation_key="sensors", state_class=SensorStateClass.MEASUREMENT, icon="mdi:access-point-network",
                           entity_category=EntityCategory.DIAGNOSTIC, value=lambda d: _now(d).get("sensors"),
                           attributes=lambda d: {"networks": (d["current"].get("sources") or {}).get("networks")}),

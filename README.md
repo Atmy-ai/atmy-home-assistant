@@ -11,6 +11,7 @@ PM2.5 of your city from [Atmy](https://atmy.ai): public and citizen sensor netwo
 | Air quality | Good, moderate, unhealthy for sensitive groups, unhealthy, very unhealthy, hazardous |
 | PM2.5 yesterday | The last completed day on the Atmy Data Hub |
 | Pollution accumulation | 0–100: how strongly the weather keeps particles near the ground now (attributes: the next 24 hours, the maximum of the next 12) |
+| Temperature, Humidity, Pressure, Wind speed, Wind gusts | The weather Atmy keeps for the city (attributes: feels like, condition, wind direction, time of the reading) |
 | Sensors, Updated | Diagnostics: sensors in the mean and their networks, the time of the values |
 
 ## Install
@@ -24,6 +25,8 @@ PM2.5 of your city from [Atmy](https://atmy.ai): public and citizen sensor netwo
 Then Settings → Devices & services → Add integration → **Atmy**. Leave the city empty to use the city nearest to your home (within 50 km), or type a city name in any language. Add the integration again for more cities.
 
 ## Data
+
+Weather: Open-Meteo.com (CC BY 4.0), read from Atmy's own copy; the integration never calls a weather provider.
 
 Documentation: https://atmy.ai/developers/home-assistant/ · Issues: https://github.com/Atmy-ai/atmy-home-assistant/issues
 
