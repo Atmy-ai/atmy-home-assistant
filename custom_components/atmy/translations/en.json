@@ -1,0 +1,44 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Atmy air quality",
+        "description": "Leave the field empty to use the city nearest to your home (within 50 km), or type a city name in any language.",
+        "data": { "query": "City" }
+      },
+      "pick": {
+        "title": "Choose the city",
+        "data": { "city": "City" }
+      }
+    },
+    "error": {
+      "not_found": "No city with an Atmy summary matches this name.",
+      "no_city_nearby": "There is no city with an Atmy summary within 50 km of your home. Type a city name.",
+      "cannot_connect": "Atmy could not be reached. Try again later."
+    },
+    "abort": {
+      "already_configured": "This city is already added."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "pm25": { "name": "PM2.5" },
+      "aqi": { "name": "US AQI" },
+      "level": {
+        "name": "Air quality",
+        "state": {
+          "good": "Good",
+          "moderate": "Moderate",
+          "sensitive": "Unhealthy for sensitive groups",
+          "unhealthy": "Unhealthy",
+          "very_unhealthy": "Very unhealthy",
+          "hazardous": "Hazardous"
+        }
+      },
+      "pm25_yesterday": { "name": "PM2.5 yesterday" },
+      "accumulation_risk": { "name": "Pollution accumulation" },
+      "sensors": { "name": "Sensors" },
+      "updated": { "name": "Updated" }
+    }
+  }
+}
